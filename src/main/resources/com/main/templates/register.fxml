@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.templates.Controllers.RegisterController">
+   <children>
+      <Canvas fx:id="background" height="200.0" width="200.0" />
+      <HBox fx:id="mainPanel" alignment="CENTER" prefHeight="404.0" prefWidth="637.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="400.0" prefWidth="300.0" spacing="15.0">
+               <children>
+                  <Label minHeight="80.0" prefHeight="80.0" prefWidth="160.0" text="Create new Account" textAlignment="CENTER" textFill="#f0a818" wrapText="true">
+                     <font>
+                        <Font name="Poppins Regular" size="24.0" />
+                     </font>
+                  </Label>
+                  <VBox alignment="CENTER_LEFT" prefHeight="210.0" prefWidth="300.0">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <Label text="NAME" textFill="WHITE" />
+                         <TextField prefHeight="24.0" prefWidth="189.0" promptText="Joseph Martinez" style="-fx-border-width: 0px; -fx-border-radius: 5px; -fx-text-fill: black;">
+                             <VBox.margin>
+                                 <Insets bottom="20.0" />
+                             </VBox.margin>
+                             <padding>
+                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                             </padding>
+                             <font>
+                                 <Font name="Poppins Regular" size="13.0" />
+                             </font>
+                         </TextField>
+                        <Label layoutX="20.0" layoutY="20.0" text="EMAIL" textFill="WHITE" />
+                        <TextField layoutX="20.0" layoutY="36.0" prefHeight="24.0" prefWidth="189.0" promptText="example@exam.ex" style="-fx-border-width: 0px; -fx-border-radius: 5px; -fx-text-fill: black;">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <font>
+                              <Font name="Poppins Regular" size="13.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label layoutX="20.0" layoutY="95.0" text="PASSWORD" textFill="WHITE" />
+                         <PasswordField promptText="******" style="-fx-border-width: 0px; -fx-border-radius: 5px; -fx-text-fill: black;">
+                             <padding>
+                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                             </padding>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                         </PasswordField>
+                        <Label layoutX="20.0" layoutY="170.0" text="DATE BIRTH" textFill="WHITE" />
+                        <DatePicker prefHeight="44.0" prefWidth="270.0">
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </DatePicker>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </VBox>
+                   <Button fx:id="registerBtn" mnemonicParsing="false" style="-fx-background-color: #f0a818; -fx-border-radius: 40px; -fx-cursor: hand;" text="Register">
+                       <font>
+                           <Font name="Poppins Bold" size="15.0" />
+                       </font>
+                       <padding>
+                           <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                       </padding>
+                   </Button>
+                  <Label fx:id="loginLbl" onMouseClicked="#changeToLoginPage" style="-fx-cursor: hand;" text="Do you have an account?" textFill="WHITE" underline="true">
+                     <font>
+                        <Font name="Poppins Regular" size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></VBox>
+         </children>
+      </HBox>
+   </children>
+</StackPane>
