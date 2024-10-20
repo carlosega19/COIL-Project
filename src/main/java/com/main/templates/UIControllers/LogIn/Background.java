@@ -24,7 +24,7 @@ public class Background {
     private GraphicsContext gc;
     private boolean started = false;
     private boolean inLogin;
-    double gap = 10;
+    private double gap = 15;
 
 
     public Background(Canvas background, GraphicsContext gc, HBox mainPanel, boolean inLogin) {
@@ -79,17 +79,16 @@ public class Background {
                     gc.setFill(Color.web("#B0C4DE"));
                     gc.beginPath();
                     gc.moveTo(0, height); // Esquina inferior izquierda
-                    gc.lineTo(0, (height * 0.68) + gap); // Punto en la izquierda
-                    gc.lineTo(actual1.x, actual1.y + gap); // Punto en la parte inferior
+                    gc.lineTo(p1.x, p1.y + gap); // Punto en la izquierda
+                    gc.lineTo(actual1.x, p2.y + gap); // Punto en la parte inferior
                     gc.closePath();
                     gc.fill();
-
 
                     // Top right
                     gc.beginPath();
                     gc.moveTo(width, 0); // Esquina superior derecha
-                    gc.lineTo(width, height * 0.32 - gap); // Punto en la derecha
-                    gc.lineTo(actual2.x, actual2.y - gap); // Punto en la parte superior
+                    gc.lineTo(p4.x, p4.y - gap); // Punto en la derecha
+                    gc.lineTo(actual2.x, p3.y - gap); // Punto en la parte superior
                     gc.closePath();
                     gc.fill();
 
@@ -110,7 +109,6 @@ public class Background {
 
                     i += 0.01;
                     if (actual1.y >= height && actual2.y <= 0) {
-
                         this.stop();
                         started = true;
                     }
@@ -195,7 +193,7 @@ public class Background {
                     gc.beginPath();
                     gc.moveTo(width, height);
                     gc.lineTo(p1.x, p1.y + gap); // Punto en la izquierda
-                    gc.lineTo(actual1.x, actual1.y + gap); // Punto en la parte inferior
+                    gc.lineTo(actual1.x, p2.y + gap); // Punto en la parte inferior
                     gc.closePath();
                     gc.fill();
 
@@ -203,20 +201,17 @@ public class Background {
                     gc.beginPath();
                     gc.moveTo(0, 0);
                     gc.lineTo(p4.x, p4.y - gap); // Punto en la derecha
-                    gc.lineTo(actual2.x, actual2.y - gap); // Punto en la parte superior
+                    gc.lineTo(actual2.x, p3.y - gap); // Punto en la parte superior
                     gc.closePath();
                     gc.fill();
 
                     // Lines
                     gc.setStroke(Color.web("#FFA500"));
                     gc.setLineWidth(2); // Grosor de la línea dorada
-
                     // Bottom right
                     gc.strokeLine(p1.x, p1.y, actual1.x, actual1.y);
-
                     // Top left
                     gc.strokeLine(p4.x, p4.y, actual2.x, actual2.y);
-
 
                     actual1.add(Vec2d.angleBetween(p1, p2).setMagnitude(speedCalc(i)));
                     actual2.add(Vec2d.angleBetween(p4, p3).setMagnitude(speedCalc(i)));

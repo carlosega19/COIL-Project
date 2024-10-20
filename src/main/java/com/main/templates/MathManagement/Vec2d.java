@@ -35,8 +35,5 @@ public class Vec2d {
         double theta = Math.atan2(dy, dx);
         double mag = 0.1;
         return fromPolar(theta, mag);
-
-
     }
-
 }
