@@ -1,4 +1,4 @@
-package com.main.templates.Controllers;
+package com.main.templates.UIControllers.LogIn;
 
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;

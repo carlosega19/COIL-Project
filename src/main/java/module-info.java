@@ -5,6 +5,8 @@ module com.main.templates {
 
     opens com.main.templates to javafx.fxml;
     exports com.main.templates;
-    exports com.main.templates.Controllers;
-    opens com.main.templates.Controllers to javafx.fxml;
+    exports com.main.templates.UIControllers.LogIn;
+    opens com.main.templates.UIControllers.LogIn to javafx.fxml;
+    exports com.main.templates.UIControllers.Home;
+    opens com.main.templates.UIControllers.Home to javafx.fxml;
 }

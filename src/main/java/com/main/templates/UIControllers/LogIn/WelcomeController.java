@@ -1,4 +1,4 @@
-package com.main.templates.Controllers;
+package com.main.templates.UIControllers.LogIn;
 
 import com.main.templates.Main;
 import javafx.animation.FadeTransition;
@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;

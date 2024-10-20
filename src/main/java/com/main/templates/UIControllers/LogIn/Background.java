@@ -1,4 +1,4 @@
-package com.main.templates.Controllers;
+package com.main.templates.UIControllers.LogIn;
 
 import com.main.templates.Main;
 import com.main.templates.MathManagement.Vec2d;
