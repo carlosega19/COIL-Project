@@ -1,19 +1,24 @@
 package com.main.templates.Controllers;
 
-import com.main.templates.HelloApplication;
+import com.main.templates.Main;
 import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
 
 public class WelcomeController {
+    @FXML
+    private VBox mainPanel;
+
     @FXML
     private Label welcomeLabel;
 
@@ -41,7 +46,7 @@ public class WelcomeController {
         showName.setOnFinished(e-> {
             Stage stage = (Stage) welcomeLabel.getScene().getWindow();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
             Scene scene = null;
             try {
                 scene = new Scene(fxmlLoader.load(), 750, 550);
@@ -57,7 +62,17 @@ public class WelcomeController {
         showWelcome.setOnFinished(e->{
             showName.play();
         });
+
+
+        applyProcessing();
         showWelcome.play();
 
+    }
+
+    protected void applyProcessing() {
+        ColorAdjust ca = new ColorAdjust();
+        ca.setContrast(0.2);
+        ca.setBrightness(0.25);
+        mainPanel.setEffect(ca);
     }
 }
