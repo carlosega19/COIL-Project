@@ -1,4 +1,4 @@
-package com.main.templates.UIControllers.LogIn;
+package com.main.templates.UIControllers.LogIn.Backgrounds;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -53,4 +53,11 @@ public abstract class Background {
         still(background.getWidth(), background.getHeight());
     }
 
+    // GETTERS AND SETTERS
+    public boolean isActive() {
+        return active;
+    }
+    public boolean isStarted() {
+        return started;
+    }
 }

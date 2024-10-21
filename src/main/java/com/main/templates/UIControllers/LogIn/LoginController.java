@@ -1,6 +1,7 @@
 package com.main.templates.UIControllers.LogIn;
 
 import com.main.templates.Main;
+import com.main.templates.UIControllers.LogIn.Backgrounds.LoginBackground;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
@@ -38,11 +39,11 @@ public class LoginController {
     @FXML
     private Label registerLbl;
 
-    private loginBackground back;
+    private LoginBackground back;
     boolean started = false;
 
     public void initialize() {
-        back = new loginBackground(background, background.getGraphicsContext2D(), mainPanel);
+        back = new LoginBackground(background, background.getGraphicsContext2D(), mainPanel);
         //back.initBackground(background.getWidth(), background.getHeight());
         back.start();
 
@@ -53,12 +54,12 @@ public class LoginController {
         showLoginPane.setInterpolator(Interpolator.EASE_OUT);
         showLoginPane.play();
         mainPanel.widthProperty().addListener((obs, oldVal, newVal) -> {
-            if (back.started) {
+            if (back.isStarted()) {
                 back.still((double) newVal, background.getHeight());
             } else back.enter();
         });
         mainPanel.heightProperty().addListener((obs, oldVal, newVal) -> {
-            if (back.started) {
+            if (back.isStarted()) {
                 back.still(background.getWidth(), (double) newVal);
             } else back.enter();
         });
@@ -81,7 +82,7 @@ public class LoginController {
 
     public void changeToRegisterPage(MouseEvent e) throws IOException {
         back.exit();
-        back.active = false;
+
 
         final double height = background.getHeight();
         TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), mainPanel);

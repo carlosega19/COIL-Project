@@ -1,6 +1,7 @@
 package com.main.templates.UIControllers.LogIn;
 
 import com.main.templates.Main;
+import com.main.templates.UIControllers.LogIn.Backgrounds.RegisterBackground;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
@@ -30,10 +31,10 @@ public class RegisterController {
     @FXML
     private Label loginLbl;
 
-    private registerBackground back;
+    private RegisterBackground back;
 
     public void initialize() {
-        back = new registerBackground(background, background.getGraphicsContext2D(), mainPanel);
+        back = new RegisterBackground(background, background.getGraphicsContext2D(), mainPanel);
         back.start();
 
         mainPanel.setTranslateY(-600);
@@ -42,13 +43,15 @@ public class RegisterController {
         showRegisterPane.setToY(0);
         showRegisterPane.setInterpolator(Interpolator.EASE_OUT);
         showRegisterPane.play();
+
+        // Responsive background
         mainPanel.widthProperty().addListener((obs, oldVal, newVal) -> {
-            if (back.started) {
+            if (back.isStarted()) {
                 back.still((double) newVal, background.getHeight());
             } else back.enter();
         });
         mainPanel.heightProperty().addListener((obs, oldVal, newVal) -> {
-            if (back.started) {
+            if (back.isStarted()) {
                 back.still(background.getWidth(), (double) newVal);
             } else back.enter();
         });
@@ -70,7 +73,6 @@ public class RegisterController {
 
     public void changeToLoginPage(MouseEvent e) throws IOException {
         back.exit();
-        back.active = false;
 
         final double height = background.getHeight();
         TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), mainPanel);
