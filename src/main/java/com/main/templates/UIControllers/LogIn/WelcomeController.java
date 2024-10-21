@@ -48,7 +48,7 @@ public class WelcomeController {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
             Scene scene = null;
             try {
-                scene = new Scene(fxmlLoader.load(), 750, 550);
+                scene = new Scene(fxmlLoader.load(), mainPanel.getWidth(), mainPanel.getHeight());
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
