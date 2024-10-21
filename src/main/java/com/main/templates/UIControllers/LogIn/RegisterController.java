@@ -1,13 +1,17 @@
 package com.main.templates.UIControllers.LogIn;
 
+import com.main.templates.Main;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -26,12 +30,11 @@ public class RegisterController {
     @FXML
     private Label loginLbl;
 
-    private Background back;
-    private boolean started = false;
+    private registerBackground back;
 
     public void initialize() {
-        back = new Background(background, background.getGraphicsContext2D(), mainPanel, false);
-        back.initBackground(background.getWidth(), background.getHeight());
+        back = new registerBackground(background, background.getGraphicsContext2D(), mainPanel);
+        back.start();
 
         mainPanel.setTranslateY(-600);
         TranslateTransition showRegisterPane = new TranslateTransition(Duration.seconds(0.5), mainPanel);
@@ -40,10 +43,14 @@ public class RegisterController {
         showRegisterPane.setInterpolator(Interpolator.EASE_OUT);
         showRegisterPane.play();
         mainPanel.widthProperty().addListener((obs, oldVal, newVal) -> {
-            back.initBackground(background.getWidth(), background.getHeight());
+            if (back.started) {
+                back.still((double) newVal, background.getHeight());
+            } else back.enter();
         });
         mainPanel.heightProperty().addListener((obs, oldVal, newVal) -> {
-            back.initBackground(background.getWidth(), background.getHeight());
+            if (back.started) {
+                back.still(background.getWidth(), (double) newVal);
+            } else back.enter();
         });
 
         //COMPONENTS
@@ -61,7 +68,29 @@ public class RegisterController {
         });
     }
 
-    public void changeToLoginPage(MouseEvent mouseEvent) throws IOException {
-        back.toggleView();
+    public void changeToLoginPage(MouseEvent e) throws IOException {
+        back.exit();
+        back.active = false;
+
+        final double height = background.getHeight();
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), mainPanel);
+        transition.setFromY(0);
+        transition.setToY(height+200);
+        transition.setInterpolator(Interpolator.EASE_IN);
+        transition.setOnFinished(event -> {
+            Stage stage = (Stage) mainPanel.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load(), 750, 550);
+            } catch (IOException g) {
+                throw new RuntimeException(g);
+            }
+            stage.setTitle("Arqui-Tech | Register");
+            stage.setScene(scene);
+            stage.show();
+        });
+        transition.play();
+
     }
 }
