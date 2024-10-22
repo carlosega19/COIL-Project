@@ -166,7 +166,6 @@ public class RegisterBackground extends Background {
 
                     // elimina los puntos que quedan graficados
                     this.stop();
-
                 }
             }
         };
