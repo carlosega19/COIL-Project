@@ -2,6 +2,7 @@ module com.main.templates {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires java.instrument;
 
 
     opens com.main.templates to javafx.fxml;

@@ -10,6 +10,7 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        System.setProperty("javafx.animation.framerate", "60");
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("welcome.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load(), 750, 550);

@@ -17,8 +17,8 @@ public abstract class Background {
 
     //FPS CONTROLLER
     protected long lastUpdate = 0;
-    private final double fps = 120; // FPS deseados
-    protected final double interval = 1_000_000_000 / fps;
+    private final double fps = 60; // FPS deseados
+    protected final double interval = 1 / fps;
 
     public Background(Canvas c, GraphicsContext gc, HBox mp) {
         mainPanel = mp;
@@ -29,7 +29,7 @@ public abstract class Background {
     }
 
     protected double speedCalc(double epoch) {
-        return Math.log(epoch) * 100;
+        return Math.log(epoch) * 10;
     }
 
     protected abstract void applyProcessing();

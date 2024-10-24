@@ -46,12 +46,17 @@ public class LoginBackground extends Background {
                         Vec2d p3 = new Vec2d((width * 0.68), 0); // top right
                         Vec2d p4 = new Vec2d(width, height * 0.32);
 
+
                         if (actual1 == null) {
                             actual1 = new Vec2d(p1.x, p1.y);
                         }
                         if (actual2 == null) {
                             actual2 = new Vec2d(p4.x, p4.y);
                         }
+
+                        actual1.add(Vec2d.angleBetween(p1, p2).setMagnitude(speedCalc(i)));
+                        actual2.add(Vec2d.angleBetween(p4, p3).setMagnitude(speedCalc(i)));
+
                         gc.clearRect(0, 0, width, height);
 
                         // LoginBackground
@@ -83,8 +88,7 @@ public class LoginBackground extends Background {
                         // Top right
                         gc.strokeLine(p4.x, p4.y, actual2.x, actual2.y);
 
-                        actual1.add(Vec2d.angleBetween(p1, p2).setMagnitude(speedCalc(i)));
-                        actual2.add(Vec2d.angleBetween(p4, p3).setMagnitude(speedCalc(i)));
+
 
                         applyProcessing();
 
@@ -93,6 +97,7 @@ public class LoginBackground extends Background {
 
                             this.stop();
                             started = true;
+                            active = false;
                         }
                         lastUpdate = now;
                     }

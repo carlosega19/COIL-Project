@@ -44,7 +44,6 @@ public class LoginController {
 
     public void initialize() {
         back = new LoginBackground(background, background.getGraphicsContext2D(), mainPanel);
-        back.start();
 
         mainPanel.widthProperty().addListener((obs, oldVal, newVal) -> {
             if (!back.isActive()) {
