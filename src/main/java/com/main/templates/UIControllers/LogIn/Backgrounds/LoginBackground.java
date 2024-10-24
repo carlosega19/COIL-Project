@@ -38,6 +38,12 @@ public class LoginBackground extends Background {
     @Override
     public void enter() {
         if (!started) {
+            width = background.getWidth();
+            height = background.getHeight();
+
+            gc.clearRect(0, 0, width, height);
+            gc.setFill(Color.web("#181848"));
+            gc.fillRect(0, 0, width, height);
             timeline = new Timeline(new KeyFrame(Duration.millis(5), e-> {
                 width = background.getWidth();
                 height = background.getHeight();
@@ -56,33 +62,33 @@ public class LoginBackground extends Background {
                 gc.clearRect(0, 0, width, height);
                 gc.setFill(Color.web("#181848"));
                 gc.fillRect(0, 0, width, height);
-
-                // Bottom left
-                gc.setFill(Color.web("#B0C4DE"));
-                gc.beginPath();
-                gc.moveTo(0, height); // Esquina inferior izquierda
-                gc.lineTo(0, (height * 0.68) + gap); // Punto en la izquierda
-                gc.lineTo(actual1.x, actual1.y + gap); // Punto en la parte inferior
-                gc.closePath();
-                gc.fill();
-
-                // Top right
-                gc.beginPath();
-                gc.moveTo(width, 0); // Esquina superior derecha
-                gc.lineTo(width, height * 0.32 - gap); // Punto en la derecha
-                gc.lineTo(actual2.x, actual2.y - gap); // Punto en la parte superior
-                gc.closePath();
-                gc.fill();
-
-                // Lines
-                gc.setStroke(Color.web("#FFA500"));
-                gc.setLineWidth(2); // Grosor de la línea dorada
-
-
-                // Bottom left
-                gc.strokeLine(p1.x, p1.y, actual1.x, actual1.y);
-                // Top right
-                gc.strokeLine(p4.x, p4.y, actual2.x, actual2.y);
+//
+//                // Bottom left
+//                gc.setFill(Color.web("#B0C4DE"));
+//                gc.beginPath();
+//                gc.moveTo(0, height); // Esquina inferior izquierda
+//                gc.lineTo(0, (height * 0.68) + gap); // Punto en la izquierda
+//                gc.lineTo(actual1.x, actual1.y + gap); // Punto en la parte inferior
+//                gc.closePath();
+//                gc.fill();
+//
+//                // Top right
+//                gc.beginPath();
+//                gc.moveTo(width, 0); // Esquina superior derecha
+//                gc.lineTo(width, height * 0.32 - gap); // Punto en la derecha
+//                gc.lineTo(actual2.x, actual2.y - gap); // Punto en la parte superior
+//                gc.closePath();
+//                gc.fill();
+//
+//                // Lines
+//                gc.setStroke(Color.web("#FFA500"));
+//                gc.setLineWidth(2); // Grosor de la línea dorada
+//
+//
+//                // Bottom left
+//                gc.strokeLine(p1.x, p1.y, actual1.x, actual1.y);
+//                // Top right
+//                gc.strokeLine(p4.x, p4.y, actual2.x, actual2.y);
 
                 actual1.add(Vec2d.angleBetween(p1, p2).setMagnitude(speedCalc(i)));
                 actual2.add(Vec2d.angleBetween(p4, p3).setMagnitude(speedCalc(i)));
@@ -99,6 +105,8 @@ public class LoginBackground extends Background {
             timeline.play();
         }
         started = true;
+        active = false;
+
     }
 
     @Override

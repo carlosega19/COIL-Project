@@ -57,7 +57,7 @@ public abstract class Background {
     public void start() {
         active = true;
         enter();
-        still(background.getWidth(), background.getHeight());
+        //still(background.getWidth(), background.getHeight());
     }
 
     // GETTERS AND SETTERS
