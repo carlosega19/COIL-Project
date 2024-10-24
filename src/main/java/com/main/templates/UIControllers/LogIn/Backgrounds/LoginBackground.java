@@ -48,6 +48,15 @@ public class LoginBackground extends Background {
 
                 @Override
                 public void handle(long now) {
+                    System.out.println(background);
+                    System.out.println("p1: " + p1.x + ", " + p1.y);
+                    System.out.println("p2: " + p2.x + ", " + p2.y);
+                    System.out.println("p3: " + p3.x + ", " + p3.y);
+                    System.out.println("p4: " + p4.x + ", " + p4.y);
+                    System.out.println("actual1: " + actual1.x + ", " + actual1.y);
+                    System.out.println("actual2: " + actual2.x + ", " + actual2.y);
+                    System.out.println(width + ", " + height);
+                    System.out.println("------------\n");
                     gc.clearRect(0, 0, width, height);
 
                     // LoginBackground
