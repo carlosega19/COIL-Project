@@ -16,7 +16,6 @@ public class RegisterBackground extends Background {
         super(c, gc, mp);
     }
 
-
     @Override
     protected void applyProcessing() {
         ColorAdjust ca = new ColorAdjust();

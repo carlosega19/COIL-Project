@@ -60,6 +60,7 @@ public abstract class Background {
         //still(background.getWidth(), background.getHeight());
     }
 
+
     // GETTERS AND SETTERS
     public boolean isActive() {
         return active;

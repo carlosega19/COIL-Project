@@ -41,15 +41,10 @@ public class LoginController {
 
     private LoginBackground back;
 
+
     public void initialize() {
         back = new LoginBackground(background, background.getGraphicsContext2D(), mainPanel);
-
-        mainPanel.setTranslateY(600);
-        TranslateTransition showLoginPane = new TranslateTransition(Duration.seconds(0.5), mainPanel);
-        showLoginPane.setFromY(600);
-        showLoginPane.setToY(0);
-        showLoginPane.setInterpolator(Interpolator.EASE_OUT);
-        showLoginPane.play();
+        back.start();
 
         mainPanel.widthProperty().addListener((obs, oldVal, newVal) -> {
             if (!back.isActive()) {
@@ -67,6 +62,16 @@ public class LoginController {
         });
 
 
+        mainPanel.setTranslateY(600);
+        TranslateTransition showLoginPane = new TranslateTransition(Duration.seconds(0.5), mainPanel);
+        showLoginPane.setFromY(600);
+        showLoginPane.setToY(0);
+        showLoginPane.setInterpolator(Interpolator.EASE_OUT);
+        showLoginPane.play();
+
+
+
+
         // COMPONENTS
         loginBtn.setOnMouseEntered((e -> {
             loginBtn.setOpacity(0.5);
@@ -82,7 +87,7 @@ public class LoginController {
         }));
     }
 
-    public void changeToRegisterPage(MouseEvent e) throws IOException {
+    public void changeToRegisterPage(MouseEvent e) {
         back.exit();
 
 
