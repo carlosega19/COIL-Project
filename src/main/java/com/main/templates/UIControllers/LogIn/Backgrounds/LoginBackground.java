@@ -12,6 +12,9 @@ import javafx.scene.paint.Color;
 
 public class LoginBackground extends Background {
     double gap = 10;
+    Vec2d actual1 = null;
+    Vec2d actual2 = null;
+    double i = 1;
 
     public LoginBackground(Canvas c, GraphicsContext gc, HBox mp) {
         super(c, gc, mp);
@@ -30,24 +33,35 @@ public class LoginBackground extends Background {
 
     @Override
     public void enter() {
-        final double width = background.getWidth();
-        final double height = background.getHeight();
+        double width = background.getWidth();
+        double height = background.getHeight();
+        Vec2d p1 = new Vec2d(0, height * 0.68); // bottom left
+        Vec2d p2 = new Vec2d((width * 0.32), height);
+
+        Vec2d p3 = new Vec2d((width * 0.68), 0); // top right
+        Vec2d p4 = new Vec2d(width, height * 0.32);
+
+
 
         if (!started) {
             AnimationTimer timer = new AnimationTimer() {
 
-                Vec2d p1 = new Vec2d(0, height * 0.68); // bottom left
-                Vec2d p2 = new Vec2d((width * 0.32), height);
-
-                Vec2d p3 = new Vec2d((width * 0.68), 0); // top right
-                Vec2d p4 = new Vec2d(width, height * 0.32);
-
-                Vec2d actual1 = new Vec2d(p1.x, p1.y);
-                Vec2d actual2 = new Vec2d(p4.x, p4.y);
-                double i = 1;
 
                 @Override
                 public void handle(long now) {
+                    double width = background.getWidth();
+                    double height = background.getHeight();
+                    Vec2d p1 = new Vec2d(0, height * 0.68); // bottom left
+                    Vec2d p2 = new Vec2d((width * 0.32), height);
+
+                    Vec2d p3 = new Vec2d((width * 0.68), 0); // top right
+                    Vec2d p4 = new Vec2d(width, height * 0.32);
+                    if (actual1 == null) {
+                        actual1 = new Vec2d(p1.x, p1.y);
+                    }
+                    if (actual2 == null) {
+                        actual2 = new Vec2d(p4.x, p4.y);
+                    }
                     System.out.println(background);
                     System.out.println("p1: " + p1.x + ", " + p1.y);
                     System.out.println("p2: " + p2.x + ", " + p2.y);
