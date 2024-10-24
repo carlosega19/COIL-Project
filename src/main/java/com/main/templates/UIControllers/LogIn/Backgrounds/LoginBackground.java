@@ -1,8 +1,6 @@
 package com.main.templates.UIControllers.LogIn.Backgrounds;
 
 import com.main.templates.MathManagement.Vec2d;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.GaussianBlur;
 import javafx.animation.AnimationTimer;
@@ -10,9 +8,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.util.Duration;
-
-import java.sql.Time;
 
 
 public class LoginBackground extends Background {
@@ -42,133 +37,70 @@ public class LoginBackground extends Background {
             AnimationTimer timer = new AnimationTimer() {
                 @Override
                 public void handle(long now) {
-                width = background.getWidth();
-                height = background.getHeight();
-                Vec2d p1 = new Vec2d(0, height * 0.68); // bottom left
-                Vec2d p2 = new Vec2d((width * 0.32), height);
+                    if (now - lastUpdate >= interval) {
+                        width = background.getWidth();
+                        height = background.getHeight();
+                        Vec2d p1 = new Vec2d(0, height * 0.68); // bottom left
+                        Vec2d p2 = new Vec2d((width * 0.32), height);
 
-                Vec2d p3 = new Vec2d((width * 0.68), 0); // top right
-                Vec2d p4 = new Vec2d(width, height * 0.32);
+                        Vec2d p3 = new Vec2d((width * 0.68), 0); // top right
+                        Vec2d p4 = new Vec2d(width, height * 0.32);
 
-                if (actual1 == null) {
-                    actual1 = new Vec2d(p1.x, p1.y);
-                }
-                if (actual2 == null) {
-                    actual2 = new Vec2d(p4.x, p4.y);
-                }
-                    gc.clearRect(0, 0, width, height);
+                        if (actual1 == null) {
+                            actual1 = new Vec2d(p1.x, p1.y);
+                        }
+                        if (actual2 == null) {
+                            actual2 = new Vec2d(p4.x, p4.y);
+                        }
+                        gc.clearRect(0, 0, width, height);
 
-                    // LoginBackground
-                    gc.setFill(Color.web("#181848"));
-                    gc.fillRect(0, 0, width, height);
+                        // LoginBackground
+                        gc.setFill(Color.web("#181848"));
+                        gc.fillRect(0, 0, width, height);
 
-                    // Bottom left
-                    gc.setFill(Color.web("#B0C4DE"));
-                    gc.beginPath();
-                    gc.moveTo(0, height); // Esquina inferior izquierda
-                    gc.lineTo(0, (height * 0.68) + gap); // Punto en la izquierda
-                    gc.lineTo(actual1.x, actual1.y + gap); // Punto en la parte inferior
-                    gc.closePath();
-                    gc.fill();
+                        // Bottom left
+                        gc.setFill(Color.web("#B0C4DE"));
+                        gc.beginPath();
+                        gc.moveTo(0, height); // Esquina inferior izquierda
+                        gc.lineTo(0, (height * 0.68) + gap); // Punto en la izquierda
+                        gc.lineTo(actual1.x, actual1.y + gap); // Punto en la parte inferior
+                        gc.closePath();
+                        gc.fill();
 
+                        // Top right
+                        gc.beginPath();
+                        gc.moveTo(width, 0); // Esquina superior derecha
+                        gc.lineTo(width, height * 0.32 - gap); // Punto en la derecha
+                        gc.lineTo(actual2.x, actual2.y - gap); // Punto en la parte superior
+                        gc.closePath();
+                        gc.fill();
 
-                    // Top right
-                    gc.beginPath();
-                    gc.moveTo(width, 0); // Esquina superior derecha
-                    gc.lineTo(width, height * 0.32 - gap); // Punto en la derecha
-                    gc.lineTo(actual2.x, actual2.y - gap); // Punto en la parte superior
-                    gc.closePath();
-                    gc.fill();
+                        // Lines
+                        gc.setStroke(Color.web("#FFA500"));
+                        gc.setLineWidth(2); // Grosor de la línea dorada
+                        // Bottom left
+                        gc.strokeLine(p1.x, p1.y, actual1.x, actual1.y);
+                        // Top right
+                        gc.strokeLine(p4.x, p4.y, actual2.x, actual2.y);
 
+                        actual1.add(Vec2d.angleBetween(p1, p2).setMagnitude(speedCalc(i)));
+                        actual2.add(Vec2d.angleBetween(p4, p3).setMagnitude(speedCalc(i)));
 
-                    // Lines
-                    gc.setStroke(Color.web("#FFA500"));
-                    gc.setLineWidth(2); // Grosor de la línea dorada
-                    // Bottom left
-                    gc.strokeLine(p1.x, p1.y, actual1.x, actual1.y);
-                    // Top right
-                    gc.strokeLine(p4.x, p4.y, actual2.x, actual2.y);
+                        applyProcessing();
 
+                        i += 0.01;
+                        if (actual1.y >= height && actual2.y <= 0) {
 
-                    actual1.add(Vec2d.angleBetween(p1, p2).setMagnitude(speedCalc(i)));
-                    actual2.add(Vec2d.angleBetween(p4, p3).setMagnitude(speedCalc(i)));
-
-                    applyProcessing();
-
-                    i += 0.01;
-                    if (actual1.y >= height && actual2.y <= 0) {
-
-                        this.stop();
-                        started = true;
-
+                            this.stop();
+                            started = true;
+                        }
+                        lastUpdate = now;
                     }
                 }
             };
             timer.start();
         }
         started = true;
-//            timeline = new Timeline(new KeyFrame(Duration.millis(5), e-> {
-//                width = background.getWidth();
-//                height = background.getHeight();
-//                Vec2d p1 = new Vec2d(0, height * 0.68); // bottom left
-//                Vec2d p2 = new Vec2d((width * 0.32), height);
-//
-//                Vec2d p3 = new Vec2d((width * 0.68), 0); // top right
-//                Vec2d p4 = new Vec2d(width, height * 0.32);
-//
-//                if (actual1 == null) {
-//                    actual1 = new Vec2d(p1.x, p1.y);
-//                }
-//                if (actual2 == null) {
-//                    actual2 = new Vec2d(p4.x, p4.y);
-//                }
-//                gc.clearRect(0, 0, width, height);
-//                gc.setFill(Color.web("#181848"));
-//                gc.fillRect(0, 0, width, height);
-//
-//                // Bottom left
-//                gc.setFill(Color.web("#B0C4DE"));
-//                gc.beginPath();
-//                gc.moveTo(0, height); // Esquina inferior izquierda
-//                gc.lineTo(0, (height * 0.68) + gap); // Punto en la izquierda
-//                gc.lineTo(actual1.x, actual1.y + gap); // Punto en la parte inferior
-//                gc.closePath();
-//                gc.fill();
-//
-//                // Top right
-//                gc.beginPath();
-//                gc.moveTo(width, 0); // Esquina superior derecha
-//                gc.lineTo(width, height * 0.32 - gap); // Punto en la derecha
-//                gc.lineTo(actual2.x, actual2.y - gap); // Punto en la parte superior
-//                gc.closePath();
-//                gc.fill();
-//
-//                // Lines
-//                gc.setStroke(Color.web("#FFA500"));
-//                gc.setLineWidth(2); // Grosor de la línea dorada
-//
-//
-//                // Bottom left
-//                gc.strokeLine(p1.x, p1.y, actual1.x, actual1.y);
-//                // Top right
-//                gc.strokeLine(p4.x, p4.y, actual2.x, actual2.y);
-//
-//                actual1.add(Vec2d.angleBetween(p1, p2).setMagnitude(speedCalc(i)));
-//                actual2.add(Vec2d.angleBetween(p4, p3).setMagnitude(speedCalc(i)));
-//
-//                applyProcessing();
-//                i += 0.01;
-//
-//                if (actual1.y >= height && actual2.y <= 0) {
-//                    timeline.stop();
-//                    active = false;
-//                }
-//            }));
-//            timeline.setCycleCount(Timeline.INDEFINITE);
-//            timeline.play();
-//        }
-//        started = true;
-
     }
 
     @Override
