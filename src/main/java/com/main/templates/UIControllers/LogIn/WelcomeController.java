@@ -62,10 +62,8 @@ public class WelcomeController {
             showName.play();
         });
 
-
         applyProcessing();
         showWelcome.play();
-
     }
 
     protected void applyProcessing() {

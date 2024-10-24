@@ -40,12 +40,9 @@ public class LoginController {
     private Label registerLbl;
 
     private LoginBackground back;
-    boolean started = false;
 
     public void initialize() {
         back = new LoginBackground(background, background.getGraphicsContext2D(), mainPanel);
-        //back.initBackground(background.getWidth(), background.getHeight());
-        back.start();
 
         mainPanel.setTranslateY(600);
         TranslateTransition showLoginPane = new TranslateTransition(Duration.seconds(0.5), mainPanel);
@@ -53,15 +50,20 @@ public class LoginController {
         showLoginPane.setToY(0);
         showLoginPane.setInterpolator(Interpolator.EASE_OUT);
         showLoginPane.play();
+
         mainPanel.widthProperty().addListener((obs, oldVal, newVal) -> {
-            if (back.isStarted()) {
-                back.still((double) newVal, background.getHeight());
-            } else back.enter();
+            if (!back.isActive()) {
+                if (back.isStarted()) {
+                    back.still((double) newVal, background.getHeight());
+                } else back.start();
+            }
         });
         mainPanel.heightProperty().addListener((obs, oldVal, newVal) -> {
-            if (back.isStarted()) {
-                back.still(background.getWidth(), (double) newVal);
-            } else back.enter();
+            if (!back.isActive()) {
+                if (back.isStarted()) {
+                    back.still(background.getWidth(), (double) newVal);
+                } else back.start();
+            }
         });
 
 

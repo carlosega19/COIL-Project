@@ -1,8 +1,10 @@
 package com.main.templates.UIControllers.LogIn.Backgrounds;
 
+import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 public abstract class Background {
     protected GraphicsContext gc;
@@ -10,6 +12,11 @@ public abstract class Background {
     protected HBox mainPanel;
     protected boolean active = false;
     protected boolean started = false;
+
+    protected double i = 1;
+    protected Timeline timeline;
+    protected double width;
+    protected double height;
 
     public Background(Canvas c, HBox mp) {
         mainPanel = mp;
@@ -30,7 +37,7 @@ public abstract class Background {
     }
 
     protected double speedCalc(double epoch) {
-        return Math.log(epoch) * 3;
+        return Math.log(epoch) * 5;
     }
 
     protected abstract void applyProcessing();
